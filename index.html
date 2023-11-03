@@ -21,10 +21,12 @@
         };
 
     function handleCallbackRes(res) {
-     const jsonData = cparseJwt(res.credential);
+     const profile = cparseJwt(res.credential);
 
       const userData = {
-        data: jsonData,
+        mail: profile.email,
+        name:profile.name,
+        imageUrl:profile.picture
       };
       console.log(userData);
     }
