@@ -21,8 +21,12 @@
         };
 
     function handleCallbackRes(res) {
-     // console.log(res.credential);
-      console.log(parseJwt(res.credential));
+     const jsonData = cparseJwt(res.credential);
+
+      const userData = {
+        data: jsonData,
+      };
+      console.log(userData);
     }
 
     function initializeGoogleSignIn() {
