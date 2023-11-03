@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Google Sign-In Example</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+  <div id="signInDiv"></div>
+
+  <script>
+    function handleCallbackRes(res) {
+      console.log(res.credential);
+    }
+
+    function initializeGoogleSignIn() {
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        window.google.accounts.id.initialize({
+          client_id: "1065578323385-6ukalkhhqs2il0drjb46dbknj3tfos1q.apps.googleusercontent.com",
+          callback: handleCallbackRes,
+        });
+
+        window.google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme: "outline", size: "large" }
+        );
+      } else {
+        // Retry initialization if the Google script hasn't loaded yet
+        setTimeout(initializeGoogleSignIn, 100);
+      }
+    }
+
+    // Call the function to initialize Google Sign-In when the window loads
+    window.onload = initializeGoogleSignIn;
+  </script>
+</body>
+
+</html>
