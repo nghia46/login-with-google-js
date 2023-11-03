@@ -21,7 +21,7 @@
         };
 
     function handleCallbackRes(res) {
-     const profile = cparseJwt(res.credential);
+     const profile = parseJwt(res.credential);
 
       const userData = {
         mail: profile.email,
