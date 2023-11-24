@@ -12,25 +12,53 @@
 
   <script>
     const parseJwt = (token) => {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        };
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    };
 
     function handleCallbackRes(res) {
-     const profile = (res.credential);
+      const profile = (res.credential);
 
       // const userData = {
       //   mail: profile.email,
       //   name:profile.name,
       //   imageUrl:profile.picture
       // };
+      const postData = {
+        idToken: token,
+      };
       console.log(profile);
 
-      
+      const apiUrl = 'https://localhost:7276/api/Google'; // Replace with your actual API endpoint
+
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Add any additional headers if needed (e.g., authorization headers)
+        },
+        body: JSON.stringify(postData)
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle the response data
+          console.log('Response:', data);
+
+          // Continue with any additional logic as needed
+        })
+        .catch(error => {
+          // Handle errors
+          console.error('Error:', error);
+        });
     }
 
     function initializeGoogleSignIn() {
