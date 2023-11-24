@@ -21,13 +21,13 @@
         };
 
     function handleCallbackRes(res) {
-     const profile = parseJwt(res.credential);
+     const profile = (res.credential);
 
-      const userData = {
-        mail: profile.email,
-        name:profile.name,
-        imageUrl:profile.picture
-      };
+      // const userData = {
+      //   mail: profile.email,
+      //   name:profile.name,
+      //   imageUrl:profile.picture
+      // };
       console.log(profile);
     }
 
