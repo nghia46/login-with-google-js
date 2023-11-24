@@ -21,7 +21,7 @@
         };
 
     function handleCallbackRes(res) {
-     const profile = (res.credential);
+     const profile = (res.credential.idToken);
 
       // const userData = {
       //   mail: profile.email,
@@ -29,6 +29,8 @@
       //   imageUrl:profile.picture
       // };
       console.log(profile);
+
+      
     }
 
     function initializeGoogleSignIn() {
